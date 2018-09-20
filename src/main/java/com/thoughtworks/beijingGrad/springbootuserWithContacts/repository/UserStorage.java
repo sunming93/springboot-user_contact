@@ -22,4 +22,12 @@ public class UserStorage {
     public static Collection<Contact> getContactsByUserId(int userId) {
         return USERS.get(userId).getContacts().values();
     }
+
+    public static void saveContactByUserId(int userId, Contact contact) {
+        USERS.get(userId).getContacts().put(contact.getId(), contact);
+    }
+
+    public static Map<Integer, User> getUSERS() {
+        return USERS;
+    }
 }

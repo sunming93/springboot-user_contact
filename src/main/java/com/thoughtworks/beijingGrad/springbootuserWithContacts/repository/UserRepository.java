@@ -6,4 +6,6 @@ import java.util.Collection;
 
 public interface UserRepository {
     Collection<Contact> getContactsByUserId(int userId);
+
+    Contact createContactByUserId(int userId, Contact contact);
 }

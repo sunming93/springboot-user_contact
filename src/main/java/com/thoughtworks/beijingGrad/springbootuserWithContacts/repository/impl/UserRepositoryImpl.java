@@ -11,4 +11,10 @@ public class UserRepositoryImpl implements UserRepository {
     public Collection<Contact> getContactsByUserId(int userId) {
         return UserStorage.getContactsByUserId(userId);
     }
+
+    @Override
+    public Contact createContactByUserId(int userId, Contact contact) {
+        UserStorage.saveContactByUserId(userId, contact);
+        return contact;
+    }
 }
