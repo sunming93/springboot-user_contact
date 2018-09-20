@@ -8,4 +8,6 @@ public interface UserRepository {
     Collection<Contact> getContactsByUserId(int userId);
 
     Contact createContactByUserId(int userId, Contact contact);
+
+    Contact updateContactByUserId(int userId, int contactId, Contact contact);
 }

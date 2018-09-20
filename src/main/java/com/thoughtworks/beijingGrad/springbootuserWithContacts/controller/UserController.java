@@ -17,9 +17,16 @@ public class UserController {
                 HttpStatus.OK);
     }
 
-    @PostMapping("users/{userId}/contacts")
+    @PostMapping("/users/{userId}/contacts")
     public ResponseEntity<?> createContactByUserId(@PathVariable int userId, @RequestBody Contact contact){
         return new ResponseEntity<>(userRepository.createContactByUserId(userId, contact),
                 HttpStatus.CREATED);
+    }
+
+    @PutMapping("/users/{userId}/contacts/{contactId}")
+    public ResponseEntity<?> updateContactByUserId(@PathVariable int userId, @PathVariable int contactId,
+                                                   @RequestBody Contact contact){
+        return new ResponseEntity<>(userRepository.updateContactByUserId(userId, contactId, contact),
+                HttpStatus.OK);
     }
 }

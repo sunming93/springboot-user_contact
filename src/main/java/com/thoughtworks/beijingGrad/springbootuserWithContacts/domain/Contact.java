@@ -37,4 +37,24 @@ public class Contact {
     public Gender getGender() {
         return gender;
     }
+
+    public Contact setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Contact setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public Contact setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public Contact setGender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
 }

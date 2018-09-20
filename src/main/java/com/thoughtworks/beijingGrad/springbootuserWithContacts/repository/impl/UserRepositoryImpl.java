@@ -17,4 +17,9 @@ public class UserRepositoryImpl implements UserRepository {
         UserStorage.saveContactByUserId(userId, contact);
         return contact;
     }
+
+    @Override
+    public Contact updateContactByUserId(int userId, int contactId, Contact contact) {
+        return UserStorage.updateContactByUserId(userId, contactId, contact);
+    }
 }

@@ -48,7 +48,10 @@ public class UserControllerTest {
                 .content(new ObjectMapper().writeValueAsString(contact)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(3))
-                .andExpect(jsonPath("$.name").value("zeng zhipeng"));
+                .andExpect(jsonPath("$.name").value("zeng zhipeng"))
+                .andExpect(jsonPath("$.phoneNumber").value(1234567890L))
+                .andExpect(jsonPath("$.age").value(20))
+                .andExpect(jsonPath("$.gender").value("Male"));
 
         int scaledSize = UserStorage.getUSERS().get(5).getContacts().size();
         assertEquals(origianlSize + 1, scaledSize);
@@ -63,9 +66,15 @@ public class UserControllerTest {
                 .content(new ObjectMapper().writeValueAsString(contact)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.name").value("zeng zhipeng"));
+                .andExpect(jsonPath("$.name").value("zeng zhipeng"))
+                .andExpect(jsonPath("$.phoneNumber").value(1234567890L))
+                .andExpect(jsonPath("$.age").value(20))
+                .andExpect(jsonPath("$.gender").value("Male"));
 
         Contact updatedContact = UserStorage.getUSERS().get(5).getContacts().get(2);
         assertEquals("zeng zhipeng", updatedContact.getName());
+        assertEquals(1234567890L, updatedContact.getPhoneNumber());
+        assertEquals(20, updatedContact.getAge());
+        assertEquals(Gender.Male, updatedContact.getGender());
     }
 }

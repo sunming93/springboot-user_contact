@@ -30,4 +30,13 @@ public class UserStorage {
     public static Map<Integer, User> getUSERS() {
         return USERS;
     }
+
+    public static Contact updateContactByUserId(int userId, int contactId, Contact contact) {
+        USERS.get(userId).getContacts().get(contactId)
+                .setName(contact.getName())
+                .setAge(contact.getAge())
+                .setPhoneNumber(contact.getPhoneNumber())
+                .setGender(contact.getGender());
+        return contact;
+    }
 }
