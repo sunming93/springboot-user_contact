@@ -14,6 +14,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -51,5 +52,20 @@ public class UserControllerTest {
 
         int scaledSize = UserStorage.getUSERS().get(5).getContacts().size();
         assertEquals(origianlSize + 1, scaledSize);
+    }
+
+    @Test
+    void should_update_the_contact_for_the_user_with_id_5() throws Exception{
+        Contact contact = new Contact(2, "zeng zhipeng", 1234567890L, 20, Gender.Male);
+
+        mockMvc.perform(put("/users/5/contacts/2")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(contact)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(2))
+                .andExpect(jsonPath("$.name").value("zeng zhipeng"));
+
+        Contact updatedContact = UserStorage.getUSERS().get(5).getContacts().get(2);
+        assertEquals("zeng zhipeng", updatedContact.getName());
     }
 }
