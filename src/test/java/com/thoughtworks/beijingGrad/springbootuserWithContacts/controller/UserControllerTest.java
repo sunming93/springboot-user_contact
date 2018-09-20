@@ -87,4 +87,15 @@ public class UserControllerTest {
         assertEquals(origianlSize - 1, deletedSize);
         assertNull(UserStorage.getUSERS().get(5).getContacts().get(2));
     }
+
+    @Test
+    void should_get_the_contact_by_user_name_and_contact_name() throws Exception {
+        mockMvc.perform(get("/users/?userName=zhoutian/contacts/?contactName=wu qian"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("wu qian"))
+                .andExpect(jsonPath("$.phoneNumber").value(1234567890L))
+                .andExpect(jsonPath("$.age").value(18))
+                .andExpect(jsonPath("$.gender").value("Female"));
+    }
 }
