@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.beijingGrad.springbootuserWithContacts.domain.Contact;
 import com.thoughtworks.beijingGrad.springbootuserWithContacts.domain.Gender;
 import com.thoughtworks.beijingGrad.springbootuserWithContacts.repository.UserStorage;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -12,9 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -76,5 +74,17 @@ public class UserControllerTest {
         assertEquals(1234567890L, updatedContact.getPhoneNumber());
         assertEquals(20, updatedContact.getAge());
         assertEquals(Gender.Male, updatedContact.getGender());
+    }
+
+    @Test
+    void should_delete_the_contact_for_the_user_with_id_5() throws Exception{
+        int origianlSize = UserStorage.getUSERS().get(5).getContacts().size();
+
+        mockMvc.perform(delete("/users/5/contacts/2"))
+                .andExpect(status().isNoContent());
+
+        int deletedSize = UserStorage.getUSERS().get(5).getContacts().size();
+        assertEquals(origianlSize - 1, deletedSize);
+        assertNull(UserStorage.getUSERS().get(5).getContacts().get(2));
     }
 }
