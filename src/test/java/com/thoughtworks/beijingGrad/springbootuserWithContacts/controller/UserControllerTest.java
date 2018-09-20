@@ -90,7 +90,9 @@ public class UserControllerTest {
 
     @Test
     void should_get_the_contact_by_user_name_and_contact_name() throws Exception {
-        mockMvc.perform(get("/users/?userName=zhoutian/contacts/?contactName=wu qian"))
+        mockMvc.perform(get("/users/contacts")
+                .param("userName","zhou tian")
+                .param("contactName","wu qian"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("wu qian"))

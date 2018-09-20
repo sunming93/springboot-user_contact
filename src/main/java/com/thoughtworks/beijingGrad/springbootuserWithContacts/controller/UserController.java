@@ -35,4 +35,11 @@ public class UserController {
         userRepository.deleteContactByUserId(userId, contactId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/users/contacts")
+    public ResponseEntity<?> getContactByUserNameAndContactName(
+            @RequestParam String userName, @RequestParam String contactName){
+        return new ResponseEntity<>(userRepository.getContactByUserNameAndContactName(userName, contactName),
+                HttpStatus.OK);
+    }
 }

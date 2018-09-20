@@ -43,4 +43,23 @@ public class UserStorage {
     public static void deleteContactByUserId(int userId, int contactId) {
         USERS.get(userId).getContacts().remove(contactId);
     }
+
+    public static Contact getContactByUserNameAndContactName(String userName, String contactName) {
+        for(int userId : USERS.keySet()){
+
+            User user = USERS.get(userId);
+            if(user.getName().equals(userName)){
+
+                Map<Integer, Contact> contacts = user.getContacts();
+                for(int contactId : contacts.keySet()){
+
+                    Contact contact = contacts.get(contactId);
+                    if(contact.getName().equals(contactName)){
+                        return contact;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

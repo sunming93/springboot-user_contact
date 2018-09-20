@@ -27,4 +27,9 @@ public class UserRepositoryImpl implements UserRepository {
     public void deleteContactByUserId(int userId, int contactId) {
         UserStorage.deleteContactByUserId(userId, contactId);
     }
+
+    @Override
+    public Contact getContactByUserNameAndContactName(String userName, String contactName) {
+        return UserStorage.getContactByUserNameAndContactName(userName, contactName);
+    }
 }
