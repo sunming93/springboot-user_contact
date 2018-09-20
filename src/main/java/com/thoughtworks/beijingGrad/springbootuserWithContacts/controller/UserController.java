@@ -29,4 +29,10 @@ public class UserController {
         return new ResponseEntity<>(userRepository.updateContactByUserId(userId, contactId, contact),
                 HttpStatus.OK);
     }
+
+    @DeleteMapping("/users/{userId}/contacts/{contactId}")
+    public ResponseEntity<?> delete(@PathVariable int userId, @PathVariable int contactId){
+        userRepository.deleteContactByUserId(userId, contactId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

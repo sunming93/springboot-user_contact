@@ -39,4 +39,8 @@ public class UserStorage {
                 .setGender(contact.getGender());
         return contact;
     }
+
+    public static void deleteContactByUserId(int userId, int contactId) {
+        USERS.get(userId).getContacts().remove(contactId);
+    }
 }
