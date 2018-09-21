@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping("/users/contacts")
     public ResponseEntity<?> getContactByUserNameAndContactName(
-            @RequestParam String userName, @RequestParam String contactName){
+            @RequestParam(name = "userName") String userName, @RequestParam(name = "contactName") String contactName){
         return new ResponseEntity<>(userRepository.getContactByUserNameAndContactName(userName, contactName),
                 HttpStatus.OK);
     }
